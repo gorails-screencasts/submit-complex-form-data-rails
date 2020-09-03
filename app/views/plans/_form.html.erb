@@ -1,0 +1,42 @@
+<%= form_with(model: plan, local: true) do |form| %>
+  <% if plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+      <% plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group" data-controller="range">
+    <%= form.label :range %>
+    <%= select_tag nil, options_for_select(range_options, range_string(form.object)), class: 'form-control', data: { action: "change->range#change" } %>
+
+    <%= form.hidden_field :minimum, class: 'form-control', data: { target: "range.minimum" } %>
+    <%= form.hidden_field :maximum, class: 'form-control', data: { target: "range.maximum" } %>
+  </div>
+
+  <div class="form-group">
+    <% if plan.persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', plan, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if plan.persisted? %>
+      <%= link_to "Cancel", plan, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", plans_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

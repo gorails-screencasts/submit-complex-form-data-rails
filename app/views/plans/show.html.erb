@@ -1,0 +1,21 @@
+<div class="page-header">
+  <%= link_to plans_path, class: 'btn btn-default' do %>
+    All Plans
+  <% end %>
+  <%= link_to edit_plan_path(@plan), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show plan</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @plan.title %></dd>
+
+  <dt>Minimum:</dt>
+  <dd><%= @plan.minimum %></dd>
+
+  <dt>Maximum:</dt>
+  <dd><%= @plan.maximum %></dd>
+
+</dl>
